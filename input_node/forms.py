@@ -1,7 +1,8 @@
 from django import forms
-from .models import Node
 
-class NodeForm(forms.ModelForm):
-    class Meta:
-        model = Node
-        fields = ['name', 'label', 'attributes', 'relations', 'description']
+class NodeForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    label = forms.CharField(max_length=100)
+    attributes = forms.CharField(widget=forms.Textarea)
+    relations = forms.CharField(widget=forms.Textarea)
+    description = forms.CharField(widget=forms.Textarea)

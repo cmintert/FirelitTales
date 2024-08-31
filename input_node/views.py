@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
-from django.utils import timezone
-from .models import Node
 from .forms import NodeForm
+from services.node_manager import NodeManager
 
 def input_node(request):
     if request.method == 'POST':
         form = NodeForm(request.POST)
         if form.is_valid():
-            node = form.save(commit=False)
-            node.node_created_by = request.user
-            node.node_created_on = timezone.now()
-            node.node_last_modified_by = request.user
-            node.save(modified_by=request.user)
+            manager = NodeManager()
+            manager.create_node(
+                name=form.cleaned_data['name'],
+                label=form.cleaned_data['label'],
+                attributes=form.cleaned_data['attributes'],
+                relations=form.cleaned_data['relations'],
+                description=form.cleaned_data['description'],
+                created_by=request.user.username  # Assuming you store usernames
+            )
             return redirect('landing_page')
     else:
         form = NodeForm()
