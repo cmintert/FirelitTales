@@ -41,3 +41,21 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-column {
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-column:last-child {
+    margin-right: 0;
+}
+
+.form-column div {
+    margin-bottom: 1rem;
+}

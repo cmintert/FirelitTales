@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Node Form</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Node Data</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/input_node">Input Node</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <form method="post" action="{% url 'input_node' %}">
+            {% csrf_token %}
+            <div class="form-container">
+                <div class="form-column">
+                    <div>
+                        <label for="node_name">Node Name:</label>
+                        <input type="text" id="node_name" name="node_name" required>
+                    </div>
+                    <div>
+                        <label for="node_label">Node Labels (Dictionary Format):</label>
+                        <input type="text" id="node_label" name="node_label" required>
+                    </div>
+                    <div>
+                        <label for="node_attributes">Node Attributes (Dictionary Format):</label>
+                        <textarea id="node_attributes" name="node_attributes" required></textarea>
+                    </div>
+                    <div>
+                        <label for="node_relations">Node Relations (Dictionary Format):</label>
+                        <textarea id="node_relations" name="node_relations" required></textarea>
+                    </div>
+                    <div>
+                        <label for="node_description">Node Description:</label>
+                        <textarea id="node_description" name="node_description" required></textarea>
+                    </div>
+                    <div>
+                        <label for="node_created_by">Author:</label>
+                        <input type="text" id="node_created_by" name="node_created_by" value="{{ request.user }}" readonly>
+                    </div>
+                    <div>
+                        <label for="node_created_on">Date Created:</label>
+                        <input type="date" id="node_created_on" name="node_created_on" value="{{ timezone.now|date:'Y-m-d' }}" readonly>
+                    </div>
+                    <div>
+                        <label for="node_last_modified_by">Last Modification by:</label>
+                        <input type="text" id="node_last_modified_by" name="node_last_modified_by" value="{{ timezone.now|date:'Y-m-d' }}" readonly>
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 Firelit Tales. All rights reserved.</p>
+    </footer>
+</body>
+</html>
